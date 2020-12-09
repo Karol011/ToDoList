@@ -2,33 +2,71 @@ package io.github.mat3e;
 
 import org.junit.Test;
 
+import java.util.Optional;
+
 import static org.junit.Assert.assertEquals;
 
 public class HelloServiceTest {
-    private HelloService SUT = new HelloService();
+
+    public static final String WELCOME = "Hello";
+
 
     @Test
-    public void test_prepareGreeting_null_returnsGreetingWithFallbackName() throws Exception {
+    public void test_prepareGreeting_nullName_returnsGreetingWithFallbackName() {
 
         //given
-        String name = null;
+        var mockRepository = alwaysReturningHelloRepository();
+        var SUT = new HelloService(mockRepository);
 
         //when
-        var result = SUT.prepareGreeting(name);
+        var result = SUT.prepareGreeting(null, "-1");
 
         //then
-        assertEquals("Hello " + HelloService.FALLBACK_NAME, result);
+        assertEquals(WELCOME + " " + HelloService.FALLBACK_NAME, result);
     }
+
+
     @Test
-    public void test_prepareGreeting_name_returnsGreetingWithName() throws Exception {
+    public void test_prepareGreeting_name_returnsGreetingWithName() {
 
         //given
-        String name = "someRandomName" ;
+        var SUT = new HelloService();
+        String name = "someRandomName";
 
         //when
-        var result = SUT.prepareGreeting(name);
+        var result = SUT.prepareGreeting(name, "-1");
 
         //then
-        assertEquals("Hello " + name, result);
+        assertEquals(WELCOME + " " + name, result);
+    }
+
+    @Test
+    public void test_prepareGreeting_nonExistingLang_returnsGreetingWithFallbackLang() {
+        //given
+        final String welcomeMsg = "hey";
+        var mockRepository = new LangRepository() {
+            @Override
+            Optional<Lang> findById(final Long id) {
+                return Optional.of(new Lang(null, welcomeMsg, "666"));
+            }
+        };
+        var SUT = new HelloService(mockRepository);
+        var name = "randomName";
+
+        //when
+        var result = SUT.prepareGreeting(name, null);
+
+        //then
+        assertEquals(welcomeMsg + " " + name, result);
+
+    }
+
+    private LangRepository alwaysReturningHelloRepository() {
+        return new LangRepository() {
+            @Override
+            Optional<Lang> findById(final Long id) {
+                return Optional.of(new Lang(null, WELCOME, null));
+            }
+        };
     }
 }
