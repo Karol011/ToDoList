@@ -8,7 +8,7 @@ import java.util.Optional;
 class HelloService {
 
     static final String FALLBACK_NAME = "world";
-    static final Lang FALLBACK_LANG = new Lang(1L, "Hello", "en");
+    static final Lang FALLBACK_LANG = new Lang(1, "Hello", "en");
     private final Logger logger = LoggerFactory.getLogger(HelloServlet.class);
 
 
@@ -24,9 +24,9 @@ class HelloService {
     }
 
     String prepareGreeting(String name, String lang) {
-        Long langIdNum;
+        Integer langIdNum;
         try {
-            langIdNum = Optional.ofNullable(lang).map(Long::valueOf).orElse(FALLBACK_LANG.getId());
+            langIdNum = Optional.ofNullable(lang).map(Integer::valueOf).orElse(FALLBACK_LANG.getId());
         } catch (NumberFormatException e) {
             logger.warn("Non numeric language id: "+ lang);
             langIdNum = FALLBACK_LANG.getId();

@@ -46,7 +46,7 @@ public class HelloServiceTest {
         final String welcomeMsg = "hey";
         var mockRepository = new LangRepository() {
             @Override
-            Optional<Lang> findById(final Long id) {
+            Optional<Lang> findById(final Integer id) {
                 return Optional.of(new Lang(null, welcomeMsg, "666"));
             }
         };
@@ -64,7 +64,7 @@ public class HelloServiceTest {
     private LangRepository alwaysReturningHelloRepository() {
         return new LangRepository() {
             @Override
-            Optional<Lang> findById(final Long id) {
+            Optional<Lang> findById(final Integer id) {
                 return Optional.of(new Lang(null, WELCOME, null));
             }
         };

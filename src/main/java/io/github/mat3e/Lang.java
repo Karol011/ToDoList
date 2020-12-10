@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 class Lang {
 
-    private Long id;
+    private Integer id;
     private String welcomeMsg;
     private String code;
 

@@ -14,11 +14,11 @@ public class LangRepository {
 
     public LangRepository() {
         languages = new ArrayList<>();
-        languages.add(new Lang(1L, "Hello", "en"));
-        languages.add(new Lang(2L, "Siema", "pl"));
+        languages.add(new Lang(1, "Hello", "en"));
+        languages.add(new Lang(2, "Siema", "pl"));
     }
 
-    Optional<Lang> findById(Long id) {
+    Optional<Lang> findById(Integer id) {
         return languages.stream()
                 .filter(l -> l.getId().equals(id))
                 .findFirst();
