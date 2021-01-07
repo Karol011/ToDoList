@@ -1,5 +1,7 @@
-package io.github.mat3e;
+package io.github.mat3e.hello;
 
+import io.github.mat3e.lang.Lang;
+import io.github.mat3e.lang.LangRepository;
 import org.junit.Test;
 
 import java.util.Optional;
@@ -46,7 +48,7 @@ public class HelloServiceTest {
         final String welcomeMsg = "hey";
         var mockRepository = new LangRepository() {
             @Override
-            Optional<Lang> findById(final Integer id) {
+            public Optional<Lang> findById(final Integer id) {
                 return Optional.of(new Lang(null, welcomeMsg, "666"));
             }
         };
@@ -64,7 +66,7 @@ public class HelloServiceTest {
     private LangRepository alwaysReturningHelloRepository() {
         return new LangRepository() {
             @Override
-            Optional<Lang> findById(final Integer id) {
+            public Optional<Lang> findById(final Integer id) {
                 return Optional.of(new Lang(null, WELCOME, null));
             }
         };

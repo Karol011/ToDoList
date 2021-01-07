@@ -1,4 +1,4 @@
-package io.github.mat3e;
+package io.github.mat3e.lang;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Entity
 @Table(name = "LANGUAGES")
-class Lang {
+public class Lang {
     @Id
     @GeneratedValue(generator = "inc")
     @GenericGenerator(name = "inc", strategy = "increment")

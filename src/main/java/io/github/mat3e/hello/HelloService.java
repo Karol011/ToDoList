@@ -1,5 +1,7 @@
-package io.github.mat3e;
+package io.github.mat3e.hello;
 
+import io.github.mat3e.lang.Lang;
+import io.github.mat3e.lang.LangRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
