@@ -21,4 +21,12 @@ class TodoService {
                 .map(TodoDTO::new)
                 .collect(Collectors.toList());
     }
+
+    public TodoRepository getRepository() {
+        return repository;
+    }
+
+    public void setRepository(final TodoRepository repository) {
+        this.repository = repository;
+    }
 }

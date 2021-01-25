@@ -51,16 +51,12 @@
         .catch(console.warn);
     });
 
-    // TODO: remove
-    createNewTodo({ id: 1, text: 'mock 1', done: true });
-    createNewTodo({ id: 2, text: 'mock 2', done: false });
-
     function createNewTodo(todo) {
       const label = document.createElement('label');
       label.classList.add('pure-checkbox');
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
-      checkbox.checked = todo.done;
+      checkbox.checked = todo.isDone;
       checkbox.addEventListener('click',
         (event) => {
           event.preventDefault();
